@@ -1,7 +1,0 @@
-<?xml version="1.0" ?>
-<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xml:lang="ja" version="5.0" xml:id="embedding">
-  <title>組み込み</title>
-
-  <xi:include href="exec.xml"/>
-  <xi:include href="import.xml"/>
-</chapter>

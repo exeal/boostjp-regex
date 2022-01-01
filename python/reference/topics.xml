@@ -1,8 +1,0 @@
-<?xml version="1.0" ?>
-<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xml:lang="ja" version="5.0" xml:id="topics">
-  <title>トピック</title>
-
-  <xi:include href="calling.xml"/>
-  <xi:include href="pickle.xml"/>
-  <xi:include href="indexing.xml"/>
-</chapter>
