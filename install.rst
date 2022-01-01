@@ -12,15 +12,46 @@
 
 ライブラリのコードはすべて名前空間 :cpp:member:`!boost` 内にある。
 
-他のテンプレートライブラリとは異なり、本ライブラリはテンプレートコード（ヘッダ中）と、静的コード・データ（cpp ファイル中）が混在している。したがってライブラリを使用する前に、ライブラリのサポートコードをビルドしてライブラリかアーカイブファイルを作成する必要がある。これについて各プラットフォームにおける方法を以下に述べる。
+コンパイラに C++11 以降のサポートがあれば、このライブラリはヘッダオンリーである。C++03 コンパイラは現時点ではサポートしているが非推奨となっており、今後通知なく削除する可能性がある。
+
+libboost_regex 外部ライブラリをビルドする必要があるのは、下記のいずれかの場合のみである。
+
+* ライブラリを C++03 モードで使用する。もしくは
+* 非推奨の POSIX C API を使用する。
+
+このライブラリは、Boost の他のライブラリを使用しない「スタンドアロン」モードで使用できる。このためには、
+
+* :code:`__has_include` をサポートする C++17 コンパイラを使用する。この場合 :file:`<boost/config.h>` が無ければ自動的にスタンドアロンモードとなる。もしくは
+* ビルド時に :c:macro:`BOOST_REGEX_STANDALONE` を定義する。
+
+:file:`<boost/regex/icu.hpp>` を使ってこのライブラリを ICU とともに使用する場合、提供されている CMake スクリプトを使わないのであれば自分で ICU ライブラリにリンクしなければならない。
+
+
+.. _usage_with_cmake:
+
+CMake を用いた使用
+------------------
+
+このライブラリを他の CMake スクリプトから利用できるよう、非常に基本的な :file:`CMakeLists.txt` を提供している。
+
+:file:`CMakeLists.txt` は 2 つのターゲット定義を持つ。
+
+* :code:`Boost::regex`\ ：通常のヘッダオンリービルドで使用するターゲット。
+* :code:`Boost::regex_icu`\ ：:file:`<boost/regex/icu.hpp>` を使って ICU へ依存させるのに使用するターゲット。
+
+設定オプションが 1 つある。
+
+.. c:macro:: BOOST_REGEX_STANDALONE
+
+   他の Boost ライブラリを依存ターゲットにせず、Boost.Regex をスタンドアロンモードにする場合に設定する。\ :code:`-DBOOST_REGEX_STANDALONE=on` として CMake を起動しスタンドアロンモードを有効化する。
 
 
 .. _install.building_with_bjam:
 
-bjam を用いたビルド
--------------------
+C++03 ユーザ限定（非推奨）：bjam を用いたビルド
+-----------------------------------------------
 
-本ライブラリをビルドおよびインストールする最適な方法である。`Getting Started ガイド <http://www.boost.org/more/getting_started.html>`_\を参照していただきたい。
+本ライブラリの古いバージョンをビルドおよびインストールする最適な方法である。`Getting Started ガイド <http://www.boost.org/more/getting_started.html>`_\を参照していただきたい。
 
 
 .. _install.building_with_unicode_and_icu_su:
@@ -48,27 +79,41 @@ Boost.Regex は、ICU がコンパイラの検索パスにインストールさ�
 
        - has_icu builds           : no
 
-ICU は見つからず、関連するサポートはライブラリのコンパイルに含まれない。これが期待した結果と違うという場合は、ファイル :file:`boost-root/bin.v2/config.log` の内容を見て、設定チェック時にビルドが吐き出した実際のエラーメッセージを確認すべきである。コンパイラに適切なオプションを渡してエラーを修正する必要があるだろう。例えば、:file:`{some-include-path}` をコンパイラのヘッダインクルードパスに追加するには次のようにする。
+ICU は見つからず、関連するサポートはライブラリのコンパイルに含まれない。これが期待した結果と違うという場合は、ファイル :file:`boost-root/bin.v2/config.log` の内容を見て、設定チェック時にビルドが吐き出した実際のエラーメッセージを確認すべきである。コンパイラに適切なオプションを渡してエラーを修正する必要があるだろう。\ :program:`b2` に渡す主要なオプションは、
 
-.. code-block:: console
+.. option:: include=/some/path
 
-   bjam include=some-include-path --toolset=toolset-name install
+   インクルードファイルの探索パスリストに :file:`/some/path` を追加する。大半のコンパイラにおける :option:`!-I/some/path` と等価である。
 
-あるいは ICU のバイナリが非標準的な名前でビルドされている場合に、ライブラリのリンク時に既定のICUバイナリ名の代わりに :samp:`{linker-options-for-icu}` を使用するには次のようにする。
+.. option:: library-path=/some/path
 
-.. code-block:: console
+   外部ライブラリの探索パスリストに :file:`/some/path` を追加する。ICU バイナリが非標準的な場所にある場合に設定する。
 
-   bjam -sICU_LINK="linker-options-for-icu" --toolset=toolset-name install
+.. option:: -sICU_ICUUC_NAME=NAME
 
-オプション :option:`!cxxflags=option` および :option:`!linkflags=-option` でコンパイラやリンカに固有のオプションを設定する必要があるかもしれない。
+   :file:`libicuuc` が非標準的な名前を持つ場合、リンク対象ライブラリの名前を設定する。既定は :file:`icuuc` 、\ :file:`icuucd` 、\ :file:`sicuuc` 、:file:`sicuucd` のいずれかである（ビルドオプションによる）。
+
+.. option:: -sICU_ICUDT_NAME=NAME
+
+   :file:`libicudata` が非標準的な名前を持つ場合、リンク対象ライブラリの名前を設定する。既定は :file:`icudt` 、\ :file:`icudata` 、\ :file:`sicudt` 、:file:`sicudata` のいずれかである（ビルドオプションによる）。
+
+.. option:: -sICU_ICUIN_NAME=NAME
+
+   :file:`libicui18n` が非標準的な名前を持つ場合、リンク対象ライブラリの名前を設定する。既定は :file:`icui18n` 、\ :file:`icuin` 、\ :file:`icuind` 、\ :file:`sicuin` 、:file:`sicuins` のいずれかである（ビルドオプションによる）。
+
+.. option:: cxxstd=XX
+
+   サポートされている C++ 標準を設定する。\ :option:`!XX` は 03 、11 、14 、17 、2a のいずれかである。
+
+.. option:: cxxflags="FLAGS"
+
+   :option:`!"FLAGS"` を直接コンパイラに渡す。最終手段のオプション。
+
+.. option:: linflags="FLAGS"
+
+   :option:`!"FLAGS"` をリンク時に直接コンパイラに渡す。最終手段のオプション。
 
 .. important:: 設定の結果はキャッシュされる。異なるコンパイラオプションで再ビルドする場合、bjam のコマンドラインに :option:`!-a` を付けるとすべてのターゲットが強制的に再ビルドされる。
-
-ICU がコンパイラのパスに入っておらず、ヘッダ・ライブラリ・バイナリがそれぞれ :file:`{path-to-icu/include}` 、:file:`{path-to-icu/lib}` 、:file:`{path-to-icu/bin}` にあるのであれば、環境変数 ICU_PATH でインストールした ICU のルートディレクトリを指定する必要がある。典型的なのは MSVC でビルドする場合である。例えば ICU を :file:`c:\\download\\icu` にインストールした場合は、次のようにする。
-
-.. code-block:: console
-
-   bjam -sICU_PATH=c:\download\icu --toolset=toolset-name install
 
 .. important:: ICU も Boost と同様に C++ ライブラリであり、ICU のコピーが Boost のビルドに使用したものと同じ C++ コンパイラ（およびバージョン）でビルドされていなければならないということに注意していただきたい。そうでない場合 Boost.Regex は正しく動作しない。
 

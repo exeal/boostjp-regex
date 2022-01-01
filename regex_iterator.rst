@@ -124,13 +124,13 @@ regex_iterator
         - :cpp:var:`!false`
       * - :cpp:expr:`(*it).prefix().first`
         - 最後に見つかったマッチの終端。最初の列挙の場合は対象シーケンスの先頭。
-      * - :cpp:expr:`(*it).prefix().last`
+      * - :cpp:expr:`(*it).prefix().second`
         - 見つかったマッチの先頭と同じ。:cpp:expr:`(*it)[0].first`
       * - :cpp:expr:`(*it).prefix().matched`
         - マッチ全体より前の部分が空文字列でなければ真。:cpp:expr:`(*it).prefix().first != (*it).prefix().second`
       * - :cpp:expr:`(*it).suffix().first`
         - 見つかったマッチの終端と同じ。:cpp:expr:`(*it)[0].second`
-      * - :cpp:expr:`(*it).suffix().last`
+      * - :cpp:expr:`(*it).suffix().second`
         - 対象シーケンスの終端。
       * - :cpp:expr:`(*it).suffix().matched`
         - マッチ全体より後ろの部分が空文字列でなければ真。:cpp:expr:`(*it).suffix().first != (*it).suffix().second`

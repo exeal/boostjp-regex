@@ -19,13 +19,15 @@ ICU とともに Boost.Regex を使用する
 
 に、Unicode 環境で正規表現を使用するのに必要なデータ型とアルゴリズムが含まれている。
 
-このヘッダを使用する場合は `ICU ライブラリ <http://www.ibm.com/software/globalization/icu/>`_\が必要である。また :ref:`ICU サポートを有効にして <install.building_with_unicode_and_icu_su>` Boost.Regex をビルドしていなければならない。
+このヘッダを使用する場合は `ICU ライブラリ <http://www.ibm.com/software/globalization/icu/>`_\が必要である。
 
 このヘッダにより以下のことが可能となる。
 
 * Unicode 文字列を UTF-32 コードポイントシーケンスとして扱う正規表現の作成。
 * 文字分類を含む Unicode データプロパティをサポートする正規表現の作成。
 * UTF-8 、UTF-16 、UTF-32 のいずれかで符号化された Unicode 文字列の透過的な検索。
+
+CMake ユーザは、このヘッダを使用するときに :file:`CMakeLists.txt` で :code:`Boost::regex_icu` ターゲットにリンクして ICU へ依存させなければならない。
 
 
 .. _ref.non_std_strings.icu.unicode_types:

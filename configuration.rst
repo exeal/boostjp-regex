@@ -19,6 +19,19 @@
 `Boost.Config サブシステム <http://www.boost.org/libs/config/index.html>`_\があるため、Boost.Regex を使うのに特別な構成は必要ない。問題がある場合（あるいは一般的でないコンパイラやプラットフォームを使う場合）は `Boost.Config <http://www.boost.org/libs/config/index.html>`_ に構成スクリプトがあるので、そちらを使うとよい。
 
 
+.. _configuration.standalone:
+
+（他の Boost ライブラリを使用せず）スタンドアロンモードで使用する
+-----------------------------------------------------------------
+
+このライブラリは、Boost の他のライブラリを使用しない「スタンドアロン」モードで使用可能となった。このためには以下のいずれかでなければならない。
+
+* :code:`__has_include` をサポートする C++17 コンパイラを利用する。この場合、:file:`<boost/config.hpp>` が\ **無ければ**\ 自動的にスタンドアロンモードになる。もしくは
+* ビルド時に :c:macro:`BOOST_REGEX_STANDALONE` を定義する。
+
+2 つのモードの主な違いは、Boost.Config が与えられたときにライブラリがコンパイラの欠陥を回避して自身を自動的に調整することである。特に例外サポートをオフにしてライブラリを使用するには、インクルードパスに Boost.Config のコピーを置くか、ビルド時に :c:macro:`BOOST_NO_EXCEPTIONS` を手動で定義する必要がある。
+
+
 .. _configuration.locale:
 
 ロカールおよび特性クラスの選択
@@ -42,59 +55,14 @@
    Boost.Regex は（利用可能な場合でも）あらゆる Win32 API を使用しない（:c:macro:`BOOST_REGEX_USE_C_LOCALE` が設定されない限り :c:macro:`BOOST_REGEX_USE_CPP_LOCALE` が暗黙に有効になる）。
 
 
-.. _configuration.linkage:
-
-リンケージに関するオプション
-----------------------------
-
-.. c:macro:: BOOST_REGEX_DYN_LINK
-
-   Microsoft C++ および Borland C++ ビルドでは Boost.Regex の DLL ビルドにリンクするようになる。既定では Boost.Regex は、動的 C 実行時ライブラリを使用している場合であっても静的ライブラリにリンクする。
-
-
-.. c:macro:: BOOST_REGEX_NO_LIB
-
-   Microsoft C++ および Borland C++ において、Boost.Regex がリンクするライブラリを自動的に選択しないようにする。
-
-
-.. c:macro:: BOOST_REGEX_NO_FASTCALL
-
-   Microsoft ビルドにおいて、:cpp:expr:`__fastcall` 呼び出し規約よりも :cpp:expr:`__cdecl` 呼び出し規約を使用する。マネージ・アンマネージコードの両方から同じライブラリを使用する場合に有用。
-
-
-.. _configuration.algorithm:
-
-アルゴリズムの選択
-------------------
-
-.. c:macro:: BOOST_REGEX_RECURSIVE
-
-   スタック再帰マッチアルゴリズムを使用する。これは通常最速のオプションである（といっても効果はわずかだが）が、極端な場合はスタックオーバーフローを起こす可能性がある（Win32 では安全に処理されるが、その他のプラットフォームではそうではない）。
-
-
-.. c:macro:: BOOST_REGEX_NON_RECURSIVE
-
-   非スタック再帰マッチアルゴリズムを使用する。スタック再帰に比べて若干遅いが、どれだけ病的な正規表現に対しても安全である。これは Win32 以外のプラットフォームにおける既定である。
-
-
 .. _configuration.tuning:
 
 アルゴリズムの調整
 ------------------
 
-以下のオプションは :c:macro:`BOOST_REGEX_RECURSIVE` が設定されている場合のみ有効である。
-
-
-.. c:macro:: BOOST_REGEX_HAS_MS_STACK_GUARD
-
-   Microsoft スタイルの :cpp:expr:`__try` - :cpp:expr:`__except` ブロックがサポートされており、スタックオーバーフローを安全に捕捉できることを Boost.Regex に通知する。
-
-以下のオプションは :c:macro:`BOOST_REGEX_NON_RECURSIVE` が設定されている場合のみ有効である。
-
-
 .. c:macro:: BOOST_REGEX_BLOCKSIZE
 
-   非再帰モードにおいて Boost.Regex は状態マシンのスタックのために大きめのメモリブロックを使う。ブロックのサイズが大きいほどメモリ確保の回数は少なくなる。既定は 4096 バイトであり、大抵の正規表現マッチでメモリの再確保が必要ない値である。しかしながらプラットフォームの特性を見た上で、別の値を選択することも可能である。
+   Boost.Regex は状態マシンのスタックのために大きめのメモリブロックを使う。ブロックのサイズが大きいほどメモリ確保の回数は少なくなる。既定は 4096 バイトであり、大抵の正規表現マッチでメモリの再確保が必要ない値である。しかしながらプラットフォームの特性を見た上で、別の値を選択することも可能である。
 
 
 .. c:macro:: BOOST_REGEX_MAX_BLOCKS

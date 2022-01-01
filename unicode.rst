@@ -26,4 +26,4 @@ wchar_t への依存
 Unicode 対応の正規表現型の使用
 ------------------------------
 
-`ICU ライブラリ <http://www.ibm.com/software/globalization/icu/>`_\があれば :ref:`Boost.Regex から利用できるように設定 <install.building_with_unicode_and_icu_su>`\できる。これにより Unicode 固有の文字プロパティや、UTF-8 、UTF-16 、および UTF-32 で符号化された文字列の検索をサポートする特別な正規表現型（:cpp:type:`boost::u32regex`）が提供される。:doc:`ICU 文字列クラスのサポート <icu_strings>`\を見よ。
+`ICU ライブラリ <http://www.ibm.com/software/globalization/icu/>`_\があれば Unicode 固有の文字プロパティや、UTF-8 、UTF-16 、および UTF-32 で符号化された文字列の検索をサポートする特別な正規表現型（:cpp:type:`boost::u32regex`）を提供する。:doc:`ICU 文字列クラスのサポート <icu_strings>`\を見よ。

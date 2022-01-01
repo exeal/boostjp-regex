@@ -69,7 +69,7 @@ regex_replace
 
       であれば、 ::
 
-         std::copy(m.prefix().first, m.prefix().last, out)
+         std::copy(m.prefix().first, m.prefix().second, out)
 
       を呼び出し、次を呼び出す。 ::
 
@@ -81,7 +81,7 @@ regex_replace
 
       であれば、次を呼び出す。 ::
 
-         std::copy(last_m.suffix().first, last_m,suffix().last, out)
+         std::copy(last_m.suffix().first, last_m,suffix().second, out)
 
       ただし :cpp:var:`!last_m` は最後に見つかったマッチのコピーである。
 

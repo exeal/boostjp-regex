@@ -7,11 +7,38 @@
 履歴
 ====
 
-新規項目は `svn.boost.org <http://svn.boost.org/>`_ に提出してほしい。チケットにはあなたのメールアドレスを入れておく必要がある。
+新規項目は `<https://github.com/boostorg/regex/issues>`_ に提出してほしい。
 
-現在オープンな項目は\ `ここ <https://svn.boost.org/trac/boost/query?status=assigned&status=new&status=reopened&component=regex&order=priority&col=id&col=summary&col=status&col=type&col=milestone&col=component>`_\から見られる。
+現在オープンな項目は\ `ここ <https://github.com/boostorg/regex/issues?q=is%3Aopen+is%3Aissue>`_\から見られる。
 
-クローズなものを含めた全項目は\ `ここ <https://svn.boost.org/trac/boost/query?status=assigned&status=closed&status=new&status=reopened&component=regex&order=priority&col=id&col=summary&col=status&col=type&col=milestone&col=component>`_\から見られる。
+クローズなものを含めた全項目は\ `ここ <https://github.com/boostorg/regex/issues?q=is%3Aissue+is%3Aclosed>`_\から見られる。
+
+
+.. _background.history.boost_regex_7_0_0_boost_1_78_0:
+
+Boost.Regex-7.0.0（Boost-1.78.0）
+---------------------------------
+
+* **破壊的な変更：**\ :regexp:`\\B` を :regexp:`\\b` の否定に変更した。Perl の挙動に合わせた。
+* :file:`w32_regex_traits.hpp` を :file:`windows.h` をインクルードしないように変更した。
+* ファジングに関するバグ `#151 <https://github.com/boostorg/regex/issues/151>`_ 、\ `#152 <https://github.com/boostorg/regex/issues/152>`_ 、\ `#153 <https://github.com/boostorg/regex/issues/153>`_ 、\ `#156 <https://github.com/boostorg/regex/issues/156>`_ を修正した。
+
+
+.. _background.history.boost_regex_6_0_0_boost_1_77_0:
+
+Boost.Regex-6.0.0（Boost-1.77.0）
+---------------------------------
+
+* ヘッダオンリーライブラリ対応の大規模な変更。
+* C++03 サポートを非推奨とした。
+
+
+.. _background.history.boost_regex_5_1_4_boost_1_72_0:
+
+Boost.Regex-5.1.4（Boost-1.72.0）
+---------------------------------
+
+* 些細なビルドバグを修正した。\ `#89 <https://github.com/boostorg/regex/issues/89>`_ を見よ。
 
 
 .. _background.history.boost_regex_5_1_3_boost_1_64_0:

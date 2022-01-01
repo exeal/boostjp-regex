@@ -77,13 +77,13 @@ regex_match
 	   - :cpp:var:`!false`
 	 * - :cpp:expr:`m.prefix().first`
 	   - :cpp:var:`!first`
-	 * - :cpp:expr:`m.prefix().last`
+	 * - :cpp:expr:`m.prefix().second`
 	   - :cpp:var:`!first`
 	 * - :cpp:expr:`m.prefix().matched`
 	   - :cpp:var:`!false`
 	 * - :cpp:expr:`m.suffix().first`
 	   - :cpp:var:`!last`
-	 * - :cpp:expr:`m.suffix().last`
+	 * - :cpp:expr:`m.suffix().second`
 	   - :cpp:var:`!last`
 	 * - :cpp:expr:`m.suffix().matched`
 	   - :cpp:var:`!false`
