@@ -2,9 +2,8 @@
 
 Personal Japanese translation of Boost.Regex documentation.
 
-<dl>
-  <dt>Input</dt>
-  <dd>http://www.boost.org/libs/regex/</dd>
-  <dt>Output</dt>
-  <dd>http://boostjp-regex.readthedocs.io/</dd>
-</dl>
+- Input
+  - http://www.boost.org/libs/regex/
+- Output
+  - http://boostjp-regex.readthedocs.io/
+    [![Documentation Status](https://readthedocs.org/projects/boostjp-regex/badge/?version=latest)](https://boostjp-regex.readthedocs.io/ja/latest/?badge=latest)
