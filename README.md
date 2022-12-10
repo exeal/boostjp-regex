@@ -3,7 +3,7 @@
 Personal Japanese translation of Boost.Regex documentation.
 
 - Input
-  - http://www.boost.org/libs/regex/
+  - https://www.boost.org/libs/regex/
 - Output
-  - http://boostjp-regex.readthedocs.io/
+  - https://boostjp-regex.readthedocs.io/
     [![Documentation Status](https://readthedocs.org/projects/boostjp-regex/badge/?version=latest)](https://boostjp-regex.readthedocs.io/ja/latest/?badge=latest)

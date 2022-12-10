@@ -14,6 +14,14 @@
 クローズなものを含めた全項目は\ `ここ <https://github.com/boostorg/regex/issues?q=is%3Aissue+is%3Aclosed>`_\から見られる。
 
 
+.. _background.history.boost_regex_7_0_1_boost_1_79_0:
+
+Boost.Regex-7.0.1 (Boost-1.79.0)
+--------------------------------
+
+* :option:`!-DBOOST_REGEX_MAX_CACHE_BLOCKS=0` および :file:`<atomic>` を使ったビルドに関する些細なバグを修正した。
+
+
 .. _background.history.boost_regex_7_0_0_boost_1_78_0:
 
 Boost.Regex-7.0.0（Boost-1.78.0）

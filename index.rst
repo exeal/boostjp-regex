@@ -10,7 +10,7 @@ Boost.Regex（日本語訳）
 .. note::
    .. rubric:: 翻訳にあたって
 
-   * 本書は `Boost.Regex ドキュメント <http://www.boost.org/doc/libs/1_78_0/libs/regex/index.html>`_\の日本語訳です。原文書のバージョンは翻訳時の最新である 1.78.0 です。
+   * 本書は `Boost.Regex ドキュメント <http://www.boost.org/doc/libs/1_78_0/libs/regex/index.html>`_\の日本語訳です。原文書のバージョンは翻訳時の最新である 1.80.0 です。
    * 原文の誤りは修正したうえで翻訳しました。
    * 外部文書の表題等は英語のままにしてあります。
    * 原文に含まれているローカルファイルへのハイパーリンクは削除しています。
